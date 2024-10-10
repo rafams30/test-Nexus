@@ -36,7 +36,11 @@ router.post('/converter', async (req, res) => {
             const valueUSD = (amount * prices.usd).toFixed(2);
 
             await HistoricosController.saveHistorico(crypto, valueBRL, valueUSD, userId);
-
+            
+            // Recarrega a lista de criptomoedas
+            const cryptosResponse = await axios.get('https://api.coingecko.com/api/v3/coins/list');
+            const cryptos = cryptosResponse.data;
+            
             // Renderiza o resultado no mesmo formulário
             res.render('historico/form', {
                 result: {
@@ -45,8 +49,8 @@ router.post('/converter', async (req, res) => {
                     valueBRL,
                     valueUSD
                 },
-                //crypto,
-                cryptos: await axios.get('https://api.coingecko.com/api/v3/coins/list') // Recarrega a lista de criptomoedas
+                cryptos
+               // cryptos: await axios.get('https://api.coingecko.com/api/v3/coins/list') // Recarrega a lista de criptomoedas
             });
             //res.redirect('/historicos/converter'); // Redireciona após salvar
         } catch (error) {
