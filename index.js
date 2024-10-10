@@ -21,6 +21,7 @@ const authRoutes = require('./routes/authRoutes')
 
 // Import Controller
 const HistoricosController = require('./controllers/HistoricoController')
+const AuthController = require('./controllers/AuthController')
 
 
 app.engine('handlebars', exphbs.engine())
@@ -72,7 +73,7 @@ app.use('/historicos', historicoRoutes);
 app.use('/historicos/converter', historicoRoutes); // Isso torna '/historicos/converter' disponível
 app.use('/', authRoutes)
 
-app.get('/', HistoricosController.showHistoricos)
+app.get('/', AuthController.login)
 
 console.log('Rotas registradas:');
 app._router.stack.forEach((route) => {

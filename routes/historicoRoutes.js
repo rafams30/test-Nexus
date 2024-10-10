@@ -21,6 +21,41 @@ router.get('/converter', async (req, res) => {
 });
 
 // Rota para salvar o histórico
-router.post('/converter', HistoricosController.saveHistorico);
+router.post('/converter', async (req, res) => {
+    const { crypto, amount } = req.body;
+    const userId = req.session.userid; // Verifica se o userId está definido
+    
+        try {
+            // Buscar os preços da cripto selecionada
+            const response = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=usd,brl`);
+            const prices = response.data[crypto];
+            console.log('Preços da criptomoeda:', prices);
+
+            // Calcula os valores em BRL e USD
+            const valueBRL = (amount * prices.brl).toFixed(2);
+            const valueUSD = (amount * prices.usd).toFixed(2);
+
+            await HistoricosController.saveHistorico(crypto, valueBRL, valueUSD, userId);
+
+            // Renderiza o resultado no mesmo formulário
+            res.render('historico/form', {
+                result: {
+                    amount,
+                    crypto,
+                    valueBRL,
+                    valueUSD
+                },
+                //crypto,
+                cryptos: await axios.get('https://api.coingecko.com/api/v3/coins/list') // Recarrega a lista de criptomoedas
+            });
+            //res.redirect('/historicos/converter'); // Redireciona após salvar
+        } catch (error) {
+            console.error('Erro ao converter criptomoeda:', error);
+            res.status(500).send('Erro ao converter criptomoeda');
+        }
+
+        console.log('User ID:', userId); // Verifica o userId
+        console.log('Body:', req.body);
+});
 
 module.exports = router;
