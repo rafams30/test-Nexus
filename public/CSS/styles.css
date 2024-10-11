@@ -277,22 +277,27 @@
   
   .toughts-container span {
     color: #f6982d;
-  }
+  }  
+
+
+  /*Tabela*/
   
-  /* FOOTER */
-footer {
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top: 1px solid #f6982d;
-    background-color: #222;
-  }
-  
-  footer span {
-    font-weight: bold;
-    color: #f6982d;
-  }
-  
+  table {
+    border-collapse: collapse; /* Para que as bordas não se sobreponham */
+    width: 100%; /* Ajuste a largura conforme necessário */
+}
+
+th, td {
+    padding: 15px; /* Aumenta o espaçamento interno das células */
+    border: 1px solid #ccc; /* Borda em volta de cada célula */
+}
+
+tbody tr {
+    border-bottom: 2px solid #ccc; /* Borda entre as linhas */
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5; /* Efeito de hover para as linhas */
+}
 
   

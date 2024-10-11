@@ -40,7 +40,7 @@ router.post('/converter', async (req, res) => {
             // Recarrega a lista de criptomoedas
             const cryptosResponse = await axios.get('https://api.coingecko.com/api/v3/coins/list');
             const cryptos = cryptosResponse.data;
-            
+
             // Renderiza o resultado no mesmo formulário
             res.render('historico/form', {
                 result: {
@@ -61,5 +61,8 @@ router.post('/converter', async (req, res) => {
         console.log('User ID:', userId); // Verifica o userId
         console.log('Body:', req.body);
 });
+
+
+router.get('/consultas', HistoricosController.showConsultas);
 
 module.exports = router;

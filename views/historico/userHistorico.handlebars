@@ -1,0 +1,28 @@
+<div>
+    <h2>Histórico de Consultas</h2>
+
+    {{#if consultas.length}}
+        <table>
+            <thead>
+                <tr>
+                    <th>Criptomoeda</th>
+                    <th>Valor em Real</th>
+                    <th>Valor em Dollar</th>
+                    <th>Data da Consulta</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each consultas}}
+                <tr>
+                    <td>{{this.criptoName}}</td>
+                    <td>R$ {{this.valor_BRL}}</td>
+                    <td>$ {{this.valor_USD}}</td>
+                    <td>{{this.createdAt}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <p>Nenhuma consulta realizada.</p>
+    {{/if}}
+</div>
