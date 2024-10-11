@@ -24,8 +24,9 @@
         <input type="hidden" id="valueBRL" name="valueBRL" value="{{result.valueBRL}}">
         <input type="hidden" id="valueUSD" name="valueUSD" value="{{result.valueUSD}}">
     {{/if}}
-
-    <button type="submit">Calcular</button>
+    
+    <button type="submit" class="btn-calcular">Calcular</button>
+    
 </form>
 
   {{#if result}}
@@ -44,7 +45,7 @@
             {{this}} <!-- Exibe o nome da cripto favorita -->
             <form action="/historicos/favoritos/remover" method="POST" style="display:inline;">
                 <input type="hidden" name="crypto" value="{{this}}"> <!-- Passa o nome da cripto -->
-                <button type="submit">Excluir</button>
+                <button type="submit" class="btn-remover">Excluir</button>
             </form>
         </li>
     {{/each}}
