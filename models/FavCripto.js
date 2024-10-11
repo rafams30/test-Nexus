@@ -10,16 +10,6 @@ const favCripto = db.define('favCripto', {
         allowNull: false,
         require: true,
     },
-    valor_BRL: {
-        type: DataTypes.DOUBLE,
-        allowNull: false,
-        require: true,
-    },
-    valor_USD: {
-        type: DataTypes.DOUBLE,
-        allowNull: false,
-        require: true,
-    },
 })
 
 favCripto.belongsTo(User)

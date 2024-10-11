@@ -8,8 +8,16 @@
                 <option value="{{this.id}}">{{this.name}}</option>
             {{/each}}
         </select>
+        
         <label for="amount">Quantidade:</label>
         <input type="number" id="amount" name="amount" required>
+
+        <!-- Checkbox para marcar como favorita -->
+      <div class="form-control">
+        <label for="favorite">Marcar como Favorita</label>
+        <input type="checkbox" id="favorite" name="favorite">
+      </div>
+      
     </div>
 
     {{#if result}}
@@ -26,4 +34,23 @@
   <p>Valor em BRL: R$ {{result.valueBRL}}</p>
   <p>Valor em USD: $ {{result.valueUSD}}</p>
   {{/if}}
+
+  <!-- Exibição das criptos favoritas do usuário -->
+  {{#if favorites}}
+    <h3>Criptomoedas Favoritas:</h3>
+    <ul>
+    {{#each favorites}}
+        <li>
+            {{this}} <!-- Exibe o nome da cripto favorita -->
+            <form action="/historicos/favoritos/remover" method="POST" style="display:inline;">
+                <input type="hidden" name="crypto" value="{{this}}"> <!-- Passa o nome da cripto -->
+                <button type="submit">Excluir</button>
+            </form>
+        </li>
+    {{/each}}
+    </ul>
+{{else}}
+    <p>Nenhuma criptomoeda favorita.</p>
+{{/if}}
 </div>
+
